@@ -9,7 +9,7 @@
       <div class="notice-title">通知</div>
       <ul>
       <li class="text item">
-          您的申请已通过
+          有商家认证待审核
       </li>
       </ul>
     </div>

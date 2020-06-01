@@ -1,7 +1,7 @@
 {
   "name": "dash",
-  "version": "4.2.1",
-  "description": "后台管理",
+  "version": "0.1.1",
+  "description": "团团站后台管理",
   "author": "",
   "license": "MIT",
   "scripts": {

@@ -1,7 +1,7 @@
 <template>
   <div>
     <div class="title">
-      <div class="left">活动数据</div>
+      <div class="left">营销数据</div>
       <div class="right">
         <svg-icon icon-class="filter" />
         <span>筛选</span>
@@ -15,7 +15,7 @@
           </div>
           <div class="card-panel-description">
             <div class="card-panel-text">
-              活动浏览次数
+              商家总数
             </div>
             <count-to :start-val="0" :end-val="102400" :duration="2600" class="card-panel-num" />
           </div>
@@ -28,7 +28,7 @@
           </div>
           <div class="card-panel-description">
             <div class="card-panel-text">
-              意向人数
+              活动总数
             </div>
             <count-to :start-val="0" :end-val="81212" :duration="3000" class="card-panel-num" />
           </div>

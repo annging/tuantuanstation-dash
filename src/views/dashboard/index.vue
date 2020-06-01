@@ -15,7 +15,7 @@
             <span class="popover-content-item">
               <div class="popover--item">
                 <svg-icon icon-class="pintuan" />
-                <div class="text">拼团活动</div>
+                <div class="text">拼团</div>
               </div>
             </span>
             <span class="popover-content-item">
@@ -25,45 +25,44 @@
             </span>
             <span class="popover-content-item">
               <div class="popover--item">
-                <div class="text">预约活动</div>
+                <div class="text">预约</div>
               </div>
             </span>
             <span class="popover-content-item">
               <div class="popover--item">
-                <div class="text">报名活动</div>
+                <div class="text">报名</div>
               </div>
             </span>
             <span class="popover-content-item">
               <div class="popover--item">
-                <div class="text">抽奖活动</div>
+                <div class="text">抽奖</div>
               </div>
             </span>
             <span class="popover-content-item">
               <div class="popover--item">
-                <div class="text">创建海报</div>
+                <div class="text">海报</div>
               </div>
             </span>
             <span class="popover-content-item">
               <div class="popover--item">
-                <div class="text">砍价活动</div>
+                <div class="text">砍价</div>
               </div>
             </span>
             <span class="popover-content-item">
               <div class="popover--item">
-                <div class="text">秒杀活动</div>
+                <div class="text">秒杀</div>
               </div>
             </span>
             <span class="popover-content-item">
               <div class="popover--item">
-                <div class="text">助力活动</div>
+                <div class="text">助力</div>
               </div>
             </span>
           </div>
-          <el-button slot="reference" type="primary" size="medium" class="btn-create">创建活动 ▾</el-button>
+          <el-button slot="reference" type="primary" size="medium" class="btn-create">创建方案 ▾</el-button>
         </el-popover>
         <ul class="action-menu">
-          <li class="menu-item"><el-link :underline="false"><svg-icon icon-class="user" /><span class="text">会员管理</span></el-link></li>
-          <li class="menu-item"><el-link :underline="false"><svg-icon icon-class="user" /><span class="text">公司主页</span></el-link></li>
+          <li class="menu-item"><el-link :underline="false"><svg-icon icon-class="user" /><span class="text">对账</span></el-link></li>
         </ul>
       </div>
     </div>

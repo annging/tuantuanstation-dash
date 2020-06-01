@@ -78,6 +78,12 @@
     .el-submenu .el-menu-item {
       padding-left: 50px !important;
     }
+    & .nest-menu .el-submenu>.el-submenu__title {
+      padding-left: 50px !important;
+    }
+    & .nest-menu .el-submenu .el-menu-item {
+      padding-left: 60px !important;
+    }
 
     & .nest-menu .el-submenu>.el-submenu__title,
     & .el-submenu .el-menu-item {

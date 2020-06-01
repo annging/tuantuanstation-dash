@@ -7,7 +7,7 @@ Vue.use(Router)
 import Layout from '@/layout'
 
 /* Router Modules */
-import MerchantRouter from './modules/merchant'
+
 
 /**
  * Note: sub-menu only appear when route children.length >= 1
@@ -56,219 +56,165 @@ export const constantRoutes = [
       component: () => import('@/views/dashboard/index'),
       meta: { title: '概览', icon: 'dashboard' }
     }]
-  },
+  }, //概览
+
+  {
+    path: '/platform',
+    component: Layout,
+    redirect: '/platform/index',
+    name: 'platformManage',
+    meta: { title: '平台管理', icon: 'platform' },
+    children: [
+      {
+        path: 'index',
+        name: 'platformIndex',
+        component: () => import('@/views/platform/index'),
+        meta: { title: '平台管理' },
+        hidden: true
+      },
+      {
+        path: 'music',
+        name: 'music',
+        component: () => import('@/views/platform/music'),
+        meta: { title: '音乐' }
+      },
+      {
+        path: 'recommendFanan',
+        component: () => import('@/views/activity/fangan/recommend'),
+        name: '推荐案例',
+        meta: { title: '推荐案例' }
+      },
+      {
+        path: 'recommendActivity',
+        name: ' recommendActivity',
+        component: () => import('@/views/activity/recommend'),
+        meta: { title: '推荐活动' }
+      },
+    ]
+  }, // 平台管理
 
   {
     path: '/activity',
     component: Layout,
+    redirect: '/activity/list',
+    name: 'activityManage',
+    meta: { title: '活动管理', icon: 'activity' },
     children: [
       {
         path: 'list',
         name: 'Activity',
         component: () => import('@/views/activity/list'),
-        meta: { title: '我的活动', icon: 'activity' }
+        meta: { title: '活动列表' }
       },
       {
-        path: 'detail',
+        path: 'detail/:id(\\d+)',
         name: 'detail',
         component: () => import('@/views/activity/detail/index'),
-        meta: { title: '活动管理', icon: 'activity', activeMenu: '/activity/index' },
+        meta: { title: '活动详细数据', icon: 'activity', activeMenu: '/activity/list' },
         hidden: true,
         children: [
           {
-            path: 'share/:id(\\d+)',
-            component: () => import('@/views/activity/detail/share'),
-            name: '分享推广',
-            meta: { title: '分享推广', activeMenu: '/activity/index' }
-          },
-          {
-            path: 'overview/:id(\\d+)',
+            path: 'overview',
             component: () => import('@/views/activity/detail/overview'),
-            name: '访客统计',
-            meta: { title: '访客统计', activeMenu: '/activity/index' }
-          },
-          {
-            path: 'data/:id(\\d+)',
-            component: () => import('@/views/activity/detail/data'),
-            name: '数据汇总',
-            meta: { title: '数据汇总', activeMenu: '/activity/index'}
-          },
-          {
-            path: 'danmu/:id(\\d+)',
-            component: () => import('@/views/activity/detail/danmu'),
-            name: '留言管理',
-            meta: { title: '留言', activeMenu: '/activity/index' }
-          }
-          ,
-          {
-            path: 'fenxiao/:id(\\d+)',
-            component: () => import('@/views/activity/detail/fenxiao'),
-            name: '分销管理',
-            meta: { title: '分销管理', activeMenu: '/activity/index' }
+            name: '活动详情',
+            meta: { title: '活动详情', activeMenu: '/activity/index' }
           }
         ]
       },
       {
-        path: 'edit/:id(\\d+)',
-        name: 'hdEdit',
-        component: () => import('@/views/activity/edit'),
-        meta: { title: '活动编辑', icon: 'activity', activeMenu: '/activity/list' },
-        hidden: true,
+        path: 'fangan',
+        name: 'fangan',
+        redirect: '/fangan/index',
+        component: () => import('@/views/activity/fangan'),
+        meta: { title: '活动案例'},
+        children: [
+          {
+            path: 'index',
+            component: () => import('@/views/activity/fangan/index'),
+            name: '活动案例',
+            meta: { title: '活动案例' }
+          }
+        ]
       },
-      {
-        path: 'create',
-        name: 'hdCreate',
-        component: () => import('@/views/activity/create'),
-        meta: { title: '创建活动', icon: 'activity', activeMenu: '/activity/list' },
-        hidden: true
-      }
     ]
-  },
+  }, // 活动管理
+
   {
-    path: '/member',
+    path: '/merchant',
     component: Layout,
-    redirect: '/member/index',
-    name: 'member',
-    meta: { title: '会员中心', icon: 'user' },
+    redirect: '/merchant/index',
+    name: 'merchant',
+    meta: { title: '商家管理', icon: 'merchant' },
     children: [
       {
         path: 'index',
-        name: 'memberManagement',
-        component: () => import('@/views/member/index'),
-        meta: { title: '会员管理' }
+        name: 'merchantManagement',
+        component: () => import('@/views/merchant/index'),
+        meta: { title: '商家管理' }
       },
       {
-        path: 'level',
-        name: 'memberLevel',
-        redirect: '/member/level/list',
-        component: () => import('@/views/member/level'),
-        meta: { title: '等级设置' },
-        children: [
-          {
-            path: 'list',
-            name: 'levelList',
-            component: () => import('@/views/member/level/list'),
-            meta: { title: '会员等级',  activeMenu: '/member/level/list'}
-          },
-          {
-            path: 'edit/:id(\\d+)',
-            name: 'levelEdit',
-            component: () => import('@/views/member/level/edit'),
-            meta: { title: '等级编辑' , activeMenu: '/member/level/list'},
-            hidden: true
-          },
-          {
-            path: 'create',
-            name: 'levelCreate',
-            component: () => import('@/views/member/level/create'),
-            meta: { title: '添加等级' , activeMenu: '/member/level/list'},
-            hidden: true
-          }
-        ]
-      },
+        path: 'renzheng',
+        name: 'merchantRZ',
+        component: () => import('@/views/merchant/renzheng'),
+        meta: { title: '认证审核' }
+      }
     ]
-  },
+  }, // 商家管理
+
+  {
+    path: '/user',
+    component: Layout,
+    redirect: '/user/index',
+    name: 'user',
+    meta: { title: '用户管理', icon: 'user' },
+    children: [
+      {
+        path: 'index',
+        name: 'userManagement',
+        component: () => import('@/views/user/index'),
+        meta: { title: '用户列表' }
+      }
+    ]
+  }, // 用户管理
+
+  {
+    path: '/order',
+    component: Layout,
+    redirect: '/order/index',
+    name: 'order',
+    meta: { title: '订单管理', icon: 'qianbao' },
+    children: [
+      {
+        path: 'index',
+        name: 'base',
+        component: () => import('@/views/order/index'),
+        meta: { title: '订单管理' }
+      }
+    ]
+  }, // 账户中心
+
   {
     path: '/account',
     component: Layout,
     redirect: '/account/index',
     name: 'account',
-    meta: { title: '账户中心', icon: 'user' },
+    meta: { title: '账户中心', icon: 'qianbao' },
     children: [
       {
         path: 'index',
         name: 'base',
         component: () => import('@/views/account/index'),
-        meta: { title: '个人资料' }
+        meta: { title: '账户总览' }
       },
       {
-        path: 'plan',
-        name: 'plan',
-        component: () => import('@/views/account/plan'),
-        meta: { title: '套餐', activeMenu: '/account/index' },
-        hidden: true
-      },
-      {
-        path: 'store',
-        name: 'store',
-        redirect: '/account/store/list',
-        component: () => import('@/views/account/store/index'),
-        meta: { title: '门店管理' },
-        children: [
-          {
-            path: 'list',
-            name: 'storeList',
-            component: () => import('@/views/account/store/list'),
-            meta: { title: '门店管理',  activeMenu: '/account/store/list'}
-          },
-          {
-            path: 'edit/:id(\\d+)',
-            name: 'storeEdit',
-            component: () => import('@/views/account/store/edit'),
-            meta: { title: '门店信息编辑' , activeMenu: '/account/store/list'},
-            hidden: true
-          },
-          {
-            path: 'create',
-            name: 'storeCreate',
-            component: () => import('@/views/account/store/create'),
-            meta: { title: '添加门店' , activeMenu: '/account/store/list'},
-            hidden: true
-          }
-        ]
-      },
-      {
-        path: 'staff',
-        name: 'staff',
-        redirect: '/account/staff/list',
-        component: () => import('@/views/account/staff/index'),
-        meta: { title: '员工管理' },
-        children: [
-          {
-            path: 'list',
-            name: 'staffList',
-            component: () => import('@/views/account/staff/list'),
-            meta: { title: '员工管理',  activeMenu: '/account/staff/list'}
-          },
-          {
-            path: 'edit/:id(\\d+)',
-            name: 'staffEdit',
-            component: () => import('@/views/account/staff/edit'),
-            meta: { title: '员工信息编辑' , activeMenu: '/account/staff/list'},
-            hidden: true
-          },
-          {
-            path: 'create',
-            name: 'staffCreate',
-            component: () => import('@/views/account/staff/create'),
-            meta: { title: '添加员工' , activeMenu: '/account/staff/list'},
-            hidden: true
-          }
-        ]
-      },
-      {
-        path: 'homePage',
-        name: 'homePage',
-        component: () => import('@/views/account/homePage'),
-        meta: { title: '公司主页' }
-      },
-    ]
-  },
-  {
-    path: '/marketing',
-    component: Layout,
-    redirect: '/marketing/index',
-    name: 'marketing',
-    meta: { title: '营销中心', icon: 'user' },
-    children: [
-      {
-        path: 'index',
-        name: 'marketingIndex',
-        component: () => import('@/views/marketing/index'),
-        meta: { title: '数据分析', icon: 'market' }
+        path: 'lishi',
+        name: 'lishi',
+        component: () => import('@/views/account/lishi'),
+        meta: { title: '资金明细' }
       }
     ]
-  },
+  }, // 账户中心
+
   {
     path: '/notice',
     component: Layout,
@@ -281,15 +227,9 @@ export const constantRoutes = [
         name: 'guanfang',
         component: () => import('@/views/notice/index'),
         meta: { title: '官方通知' }
-      },
-      {
-        path: 'hd',
-        name: 'huodong',
-        component: () => import('@/views/notice/huodong'),
-        meta: { title: '活动通知'}
       }
     ]
-  },
+  }, // 通知
 
   // 404 page must be placed at the end !!!
   { path: '*', redirect: '/404', hidden: true }
