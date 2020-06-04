@@ -16,6 +16,14 @@ export function fetchMerchantRzList(query) {
   })
 }
 
+export function fetchMerchantRz(id) {
+  return request({
+    url: '/api/merchantrz/detail',
+    method: 'get',
+    params: { id }
+  })
+}
+
 export function fetchMerchant(id) {
   return request({
     url: '/api/merchant/detail',
