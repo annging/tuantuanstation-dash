@@ -90,6 +90,12 @@ export const constantRoutes = [
         component: () => import('@/views/activity/recommend'),
         meta: { title: '推荐活动' }
       },
+      {
+        path: 'level',
+        name: ' level',
+        component: () => import('@/views/platform/level'),
+        meta: { title: '会员等级设置' }
+      },
     ]
   }, // 平台管理
 
@@ -153,10 +159,41 @@ export const constantRoutes = [
         meta: { title: '商家管理' }
       },
       {
+        path: 'create',
+        name: 'merchantCreate',
+        component: () => import('@/views/merchant/create'),
+        meta: { title: '新增商家', activeMenu: '/merchant/index' },
+        hidden: true
+      },
+      {
+        path: 'paid',
+        name: 'paidMerchantManagement',
+        component: () => import('@/views/merchant/paid'),
+        meta: { title: '付费商家管理', activeMenu: '/merchant/index'},
+        hidden: true
+      },
+      {
         path: 'renzheng',
         name: 'merchantRZ',
+        redirect: '/merchant/renzheng/daishenhe',
         component: () => import('@/views/merchant/renzheng'),
-        meta: { title: '认证审核' }
+        meta: { title: '认证审核' },
+        children: [
+          {
+            path: 'daishenhe',
+            name: 'daishenhe',
+            component: () => import('@/views/merchant/renzheng/daishenhe'),
+            meta: { title: '待审核', activeMenu: '/merchant/renzheng' },
+            hidden: true
+          },
+          {
+            path: 'yishenhe',
+            name: 'yishenhe',
+            component: () => import('@/views/merchant/renzheng/yishenhe'),
+            meta: { title: '已审核', activeMenu: '/merchant/renzheng' },
+            hidden: true
+          }
+        ]
       }
     ]
   }, // 商家管理
@@ -186,7 +223,7 @@ export const constantRoutes = [
     children: [
       {
         path: 'index',
-        name: 'base',
+        name: 'orderBase',
         component: () => import('@/views/order/index'),
         meta: { title: '订单管理' }
       }
