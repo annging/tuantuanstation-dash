@@ -2,8 +2,8 @@
 	<div class="main-content">
 	  	<div class="left-container">
 	    	<el-menu default-active="1" class="" mode="horizontal" router style="margin-bottom: 20px;">
-		      	<el-menu-item index="1" :route="{path:'/merchant/renzheng/daishenhe'}">待审核</el-menu-item>
-		      	<el-menu-item index="2" :route="{path:'/merchant/renzheng/yishenhe'}">已审核</el-menu-item>
+		      	<el-menu-item index="1" :route="{path:'/account/tixianshenhe/tixiandaishenhe'}">待审核</el-menu-item>
+		      	<el-menu-item index="2" :route="{path:'/account/tixianshenhe/yitongguo'}">提现记录</el-menu-item>
 	    	</el-menu>
 		    <el-row type="flex" class="filter-container"  style="margin-bottom: 20px;">
         </el-row>
@@ -38,29 +38,21 @@
               </template>
             </el-table-column>
             <el-table-column
-              label="认证类型">
+              label="可提现(元)">
               <template slot-scope="{row}">
-                <span>{{ row.type }}</span>
+                <span>600.00</span>
               </template>
             </el-table-column>
             <el-table-column
-              label="申请人">
+              label="提现金额(元)">
               <template slot-scope="{row}">
-                <span>申请人昵称</span>
+                <span>500.00</span>
               </template>
             </el-table-column>
             <el-table-column
-              label="提交时间">
+              label="申请时间">
               <template slot-scope="{row}">
                 <span>{{row.create_time}}</span>
-              </template>
-            </el-table-column>
-            <el-table-column
-              label="认证资料">
-              <template slot-scope="scope">
-                <el-button
-                  size="mini"
-                  @click="handleView(scope.$index, scope.row)">点击查看</el-button>
               </template>
             </el-table-column>
             <el-table-column label="操作">
@@ -77,17 +69,6 @@
           </el-table>
           <pagination v-show="total>0" :total="total" :page.sync="listQuery.page" :limit.sync="listQuery.limit" @pagination="getList" />
         </el-row>
-        <el-dialog
-          title="认证资料"
-          :visible.sync="dialogVisible"
-          width="45%"
-          :modal-append-to-body="false"
-          :append-to-body="true"
-          :before-close="handleClose">
-          <div class="rz-container">
-            认证资料
-          </div>
-        </el-dialog>
       </div>
       <!--<div class="secondary-sidebar"></div>-->
   </div>
@@ -167,7 +148,7 @@ export default {
     },
     handleShenhe(index, row, status) {
       //处理审核
-      this.$confirm('确认商家认证资料' + (status === 1 ? '通过' : '未通过') +'审核?', '提示', {
+      this.$confirm('确认商家提现申请' + (status === 1 ? '通过' : '未通过') +'审核?', '提示', {
         confirmButtonText: '确定',
         cancelButtonText: '取消',
         type: 'warning'

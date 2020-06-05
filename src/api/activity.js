@@ -8,6 +8,14 @@ export function fetchList(query) {
   })
 }
 
+export function fetchSchemeList(query) {
+  return request({
+    url: '/api/scheme/list',
+    method: 'get',
+    params: query
+  })
+}
+
 export function fetchActivity(id) {
   return request({
     url: '/api/activity',

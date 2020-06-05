@@ -1,11 +1,18 @@
 <template>
 	<div class="main-content">
 	  	<div class="left-container">
-	    	<el-menu default-active="1" class="" mode="horizontal" router style="margin-bottom: 20px;">
-		      	<el-menu-item index="1" :route="{path:'/merchant/renzheng/daishenhe'}">待审核</el-menu-item>
-		      	<el-menu-item index="2" :route="{path:'/merchant/renzheng/yishenhe'}">已审核</el-menu-item>
+	    	<el-menu default-active="2" class="" mode="horizontal" router style="margin-bottom: 20px;">
+		      	<el-menu-item index="1" :route="{path:'/account/tixianshenhe/tixiandaishenhe'}">待审核</el-menu-item>
+            <el-menu-item index="2" :route="{path:'/account/tixianshenhe/yitongguo'}">提现记录</el-menu-item>
 	    	</el-menu>
 		    <el-row type="flex" class="filter-container"  style="margin-bottom: 20px;">
+          <el-input
+            v-model="listQuery.searchStr"
+            placeholder="请输入内容"
+            prefix-icon="el-icon-search"
+            size="small"
+            class="filter-item"
+            @keyup.enter.native="handleFilter" />
         </el-row>
         <el-row class="list">
           <el-table
@@ -38,40 +45,19 @@
               </template>
             </el-table-column>
             <el-table-column
-              label="认证类型">
+              label="提现金额(元)">
               <template slot-scope="{row}">
-                <span>{{ row.type }}</span>
+                <span>500.00</span>
               </template>
             </el-table-column>
             <el-table-column
-              label="申请人">
-              <template slot-scope="{row}">
-                <span>申请人昵称</span>
-              </template>
-            </el-table-column>
-            <el-table-column
-              label="提交时间">
+              label="申请时间">
               <template slot-scope="{row}">
                 <span>{{row.create_time}}</span>
               </template>
             </el-table-column>
-            <el-table-column
-              label="认证资料">
-              <template slot-scope="scope">
-                <el-button
-                  size="mini"
-                  @click="handleView(scope.$index, scope.row)">点击查看</el-button>
-              </template>
-            </el-table-column>
             <el-table-column label="操作">
               <template slot-scope="scope">
-                <el-button
-                  size="mini"
-                  @click="handleShenhe(scope.$index, scope.row, 1)">通过</el-button>
-                <el-button
-                  size="mini"
-                  type="danger"
-                  @click="handleShenhe(scope.$index, scope.row, 0)">不通过</el-button>
               </template>
             </el-table-column>
           </el-table>
@@ -94,14 +80,14 @@
 </template>
 
 <script>
-import { fetchMerchantRzList, fetchMerchantRz } from '@/api/merchant'
+import { fetchMerchantRzList} from '@/api/merchant'
 import Pagination from '@/components/Pagination' // secondary package based on el-pagination
 
 export default {
   components: { Pagination },
   data() {
     return {
-      list: [],
+      list: null,
       total: 0,
       listLoading: true,
       listQuery: {
@@ -164,24 +150,6 @@ export default {
     handleClose(done) {
       console.log('关闭弹窗');
       done();
-    },
-    handleShenhe(index, row, status) {
-      //处理审核
-      this.$confirm('确认商家认证资料' + (status === 1 ? '通过' : '未通过') +'审核?', '提示', {
-        confirmButtonText: '确定',
-        cancelButtonText: '取消',
-        type: 'warning'
-      }).then(() => {
-        this.$message({
-          type: 'success',
-          message: '操作成功!'
-        });
-      }).catch(() => {
-        this.$message({
-          type: 'info',
-          message: '已取消操作'
-        });          
-      });
     }
   }
 }

@@ -80,15 +80,15 @@ export const constantRoutes = [
       },
       {
         path: 'recommendFanan',
-        component: () => import('@/views/activity/fangan/recommend'),
-        name: '推荐案例',
-        meta: { title: '推荐案例' }
+        component: () => import('@/views/activity/anliRecommend'),
+        name: '优秀案例',
+        meta: { title: '优秀案例' }
       },
       {
         path: 'recommendActivity',
         name: ' recommendActivity',
         component: () => import('@/views/activity/recommend'),
-        meta: { title: '推荐活动' }
+        meta: { title: '首页推荐' }
       },
       {
         path: 'level',
@@ -132,13 +132,27 @@ export const constantRoutes = [
         name: 'fangan',
         redirect: '/fangan/index',
         component: () => import('@/views/activity/fangan'),
-        meta: { title: '活动案例'},
+        meta: { title: '活动方案'},
         children: [
           {
             path: 'index',
             component: () => import('@/views/activity/fangan/index'),
-            name: '活动案例',
-            meta: { title: '活动案例' }
+            name: '活动方案',
+            meta: { title: '活动方案' }
+          },
+          {
+            path: 'create',
+            component: () => import('@/views/activity/fangan/create'),
+            name: 'createFangan',
+            meta: { title: '创建方案', activeMenu: '/activity/fangan/index' },
+            hidden: true
+          },
+          {
+            path: 'edit/:id(\\d+)',
+            name: 'editFangan',
+            component: () => import('@/views/activity/fangan/edit'),
+            meta: { title: '编辑方案', activeMenu: '/activity/fangan/index' },
+            hidden: true,
           }
         ]
       },
@@ -248,6 +262,29 @@ export const constantRoutes = [
         name: 'lishi',
         component: () => import('@/views/account/lishi'),
         meta: { title: '资金明细' }
+      },
+      {
+        path: 'tixianshenhe',
+        name: 'tixianshenhe',
+        redirect: '/account/tixianshenhe/tixiandaishenhe',
+        component: () => import('@/views/account/tixianshenhe'),
+        meta: { title: '提现审核' },
+        children: [
+          {
+            path: 'tixiandaishenhe',
+            name: 'tixiandaishenhe',
+            component: () => import('@/views/account/tixianshenhe/daishenhe'),
+            meta: { title: '待审核', activeMenu: '/account/tixianshenhe' },
+            hidden: true
+          },
+          {
+            path: 'yitongguo',
+            name: 'yitongguo',
+            component: () => import('@/views/account/tixianshenhe/yitongguo'),
+            meta: { title: '提现记录', activeMenu: '/account/tixianshenhe' },
+            hidden: true
+          }
+        ]
       }
     ]
   }, // 账户中心
