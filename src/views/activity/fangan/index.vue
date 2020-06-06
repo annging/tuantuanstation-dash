@@ -2,16 +2,29 @@
   <div class="main-content">
     <div class="left-container">
       <el-menu default-active="1" class="" mode="horizontal" router style="margin-bottom: 20px;">
-        <el-menu-item index="1" :route="{path:'/account/store/list/'}">方案列表</el-menu-item>
+        <el-menu-item index="1" :route="{path:'/activity/fangan/index/'}">方案列表</el-menu-item>
+        <el-menu-item index="2" :route="{path:'/activity/fangan/recommend/'}">推荐方案列表</el-menu-item>
       </el-menu>
       <el-row type="flex" class="filter-container" style="margin-bottom: 20px;">
-        <el-button type="primary" size="small" style="min-width: 120px; margin-right: 20px;" icon="el-icon-circle-plus-outline" @click="goCreate">新增方案</el-button>
         <el-input
-            v-model="listQuery.searchStr"
-            placeholder="请输入内容"
-            prefix-icon="el-icon-search"
-            size="small"
-            @keyup.enter.native="handleFilter" />
+          class="filter-item"
+          v-model="listQuery.searchStr"
+          placeholder="请输入内容"
+          prefix-icon="el-icon-search"
+          size="small"
+          @keyup.enter.native="handleFilter" />
+        <el-select size="small" v-model="listQuery.type" style="width: 200px" class="filter-item" @change="handleFilter" placeholder="活动类型">
+          <el-option  label="全部类型" value="" />
+          <el-option v-for="item in activityTypes" :key="item.key" :label="item.label" :value="item.key" />
+        </el-select>
+        <el-select size="small" v-model="listQuery.industry" style="width: 200px" class="filter-item" @change="handleFilter" placeholder="行业">
+          <el-option  label="全部行业" value="" />
+          <el-option v-for="item in industrys" :key="item.key" :label="item.label" :value="item.key" />
+        </el-select>
+        <el-button size="small" class="filter-item" type="primary" icon="el-icon-search" @click="handleFilter">
+            搜索
+        </el-button>  
+        <el-button type="primary" size="small" style="min-width: 120px;" icon="el-icon-circle-plus-outline" @click="goCreate">新增方案</el-button>
       </el-row>
       <el-row class="list">
         <el-table
@@ -64,8 +77,25 @@
                 <span>{{row.industry}}</span>
               </template>
             </el-table-column>
+            <el-table-column
+              label="浏览"
+              width="100">
+              <template slot-scope="{row}">
+                <span>1000</span>
+              </template>
+            </el-table-column>
+            <el-table-column
+              label="领取"
+              width="100">
+              <template slot-scope="{row}">
+                <span>88</span>
+              </template>
+            </el-table-column>
             <el-table-column label="操作">
               <template slot-scope="scope">
+                <el-button
+                  size="mini"
+                  @click="handleRecommend(scope.$index, scope.row)">推荐</el-button>
                 <el-button
                   size="mini"
                   @click="handleEdit(scope.$index, scope.row)">编辑</el-button>
@@ -84,7 +114,7 @@
 
 <script>
 import { fetchSchemeList } from '@/api/activity'
-import Pagination from '@/components/Pagination' // secondary package based on el-pagination
+import Pagination from '@/components/Pagination' // secondary package based on el-pagination、
 
 export default {
   components: { Pagination },
@@ -97,10 +127,14 @@ export default {
         searchStr: '',
         page: 1,
         limit: 20,
-        sort: '+id'
+        sort: '+id',
+        type: '',
+        industry: ''
       },
       clientHeight: '',
-      maxHeight: 400
+      maxHeight: 400,
+      activityTypes: [{ key: 1, label: '报名' }, { key: 2, label: '抽奖' }, { key: 3, label: '海报' }, { key: 4, label: '砍价' }, { key: 5, label: '秒杀' }, { key: 6, label: '拼团' }, { key: 7, label: '投票' }, { key: 8, label: '预约' }, { key: 9, label: '助力' }, { key: 10, label: '代金券' }, { key: 11, label: '折扣券' }, { key: 12, label: '兑换券' }, { key: 13, label: '体验券' }],
+      industrys: [{ key: 1, label: '教育' }, { key: 2, label: '体育' }, { key: 3, label: '珠宝' }]
     };
   },
   watch: {
@@ -177,6 +211,23 @@ export default {
           message: '已取消操作'
         });          
       });
+    },
+    handleRecommend(index, row) {
+       this.$prompt('请输入推荐值，值越大，越靠前', '推荐方案', {
+          confirmButtonText: '确定',
+          cancelButtonText: '取消',
+        }).then(({ value }) => {
+          //todo something
+          this.$message({
+            type: 'success',
+            message: '推荐方案成功，推荐值: ' + value
+          });
+        }).catch(() => {
+          this.$message({
+            type: 'info',
+            message: '取消操作'
+          });       
+        });
     }
   }
 }
@@ -214,5 +265,8 @@ export default {
   .el-menu--horizontal>.el-menu-item.is-active {
     border-bottom: 1px solid #000;
     color: #303133;
+  }
+  .filter-item {
+    margin-right: 10px;
   }
 </style>

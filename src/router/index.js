@@ -153,7 +153,14 @@ export const constantRoutes = [
             component: () => import('@/views/activity/fangan/edit'),
             meta: { title: '编辑方案', activeMenu: '/activity/fangan/index' },
             hidden: true,
-          }
+          },
+          {
+            path: 'recommend',
+            component: () => import('@/views/activity/fangan/recommend'),
+            name: '推荐方案列表',
+            meta: { title: '推荐方案列表', activeMenu: '/activity/fangan/index'},
+            hidden: true
+          },
         ]
       },
     ]

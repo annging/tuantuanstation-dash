@@ -5,7 +5,7 @@
       <el-menu-item index="1" :route="{path:'/activity/fangan/create/'}">添加方案</el-menu-item>
     </el-menu>
     <el-row>
-      <el-form ref="form" :rules="rules" :model="schemeForm" label-width="80px" size="small">
+      <el-form ref="form" :rules="rules" :model="schemeForm" label-width="100px" size="small">
         <el-form-item label="方案标题">
           <el-input v-model="schemeForm.title"></el-input>
         </el-form-item>
@@ -41,6 +41,12 @@
             <el-option v-for="item in industrys" :key="item.key" :label="item.label" :value="item.key" />
           </el-select>
         </el-form-item>
+        <el-form-item label="虚拟浏览量">
+          <el-input v-model="schemeForm.addView"></el-input>
+        </el-form-item>
+        <el-form-item label="虚拟参与量">
+          <el-input v-model="schemeForm.addParticipate"></el-input>
+        </el-form-item>
         <el-form-item label="权重">
           <el-input v-model="schemeForm.power" placeholder="值越大，越靠前"></el-input>
         </el-form-item>
@@ -64,6 +70,8 @@ const defaultForm = {
     type: '',
     industry: '',
     desc: '',
+    addView: 0,
+    addParticipate: 0,
     power: '',
     id: ''
 }
